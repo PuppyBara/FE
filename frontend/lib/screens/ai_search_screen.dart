@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MyScreen extends StatelessWidget {
-  const MyScreen({super.key});
+class AiSearchScreen extends StatelessWidget {
+  const AiSearchScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

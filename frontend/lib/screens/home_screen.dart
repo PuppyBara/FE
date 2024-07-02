@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/widgets/ExpansionPanelRadioList.dart';
+import 'package:frontend/screens/ai_search_screen.dart';
+import 'package:frontend/screens/my_screen.dart';
+import 'package:frontend/screens/shelter_search_screen.dart';
+import 'package:frontend/widgets/expansion_panel_radio_list.dart';
+import 'package:frontend/widgets/bottom_bar.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   static const buttonTextColor = Color.fromRGBO(59, 59, 59, 0.39);
 
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _selectedIndex = 0;
+
 
   @override
   Widget build(BuildContext context) {
@@ -200,15 +212,25 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              child: Column(
-                // children: [ExpansionPanelRadioList(panels: panelDataList)],
-              ),
-            )
+            // Container(
+            //   child: const Column(
+            //       children: [ExpansionPanelRadioList(panels: panelDataList)],
+            //       ),
+            // )
           ],
         ),
       ),
+      bottomNavigationBar: BottomBar(
+        selectedIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
+      ),
     );
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   Widget _buttonColumn(IconData iconData, String label) {
@@ -229,7 +251,8 @@ class HomeScreen extends StatelessWidget {
               ),
               Text(
                 label,
-                style: const TextStyle(color: buttonTextColor, fontSize: 16),
+                style: const TextStyle(
+                    color: HomeScreen.buttonTextColor, fontSize: 16),
               ),
             ],
           ),
