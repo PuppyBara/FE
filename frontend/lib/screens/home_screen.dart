@@ -3,6 +3,7 @@ import 'package:frontend/screens/ai_search_screen.dart';
 import 'package:frontend/screens/main_screen.dart';
 import 'package:frontend/screens/shelter_search_screen.dart';
 import 'package:frontend/widgets/bottom_bar.dart';
+import 'package:frontend/screens/my_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,10 +16,10 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
-    HomeScreen(),
+    MainScreen(),
     ShelterSearchScreen(),
     AiSearchScreen(),
-    MainScreen(),
+    MyScreen(),
   ];
 
   @override
@@ -43,9 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: _widgetOptions[_selectedIndex],
-      ),
+      body: _widgetOptions[_selectedIndex],
       bottomNavigationBar: BottomBar(
         selectedIndex: _selectedIndex,
         onItemTapped: _onItemTapped,
