@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/home_screen.dart';
+import 'package:frontend/screens/login_main_screen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 const Color customGreen = Color.fromRGBO(132, 205, 188, 1);
@@ -25,7 +25,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(scaffoldBackgroundColor: Colors.white),
-      home: const HomeScreen(),
+      home: const LoginMainScreen(),
     );
   }
 }

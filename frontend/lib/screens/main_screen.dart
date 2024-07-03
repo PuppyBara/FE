@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:frontend/widgets/image_slider.dart';
 
 class MainScreen extends StatelessWidget {
