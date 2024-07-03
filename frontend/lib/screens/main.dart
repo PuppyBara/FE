@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:frontend/screens/home_screen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
+const Color customGreen = Color.fromRGBO(132, 205, 188, 1);
+const Color customOrange = Color.fromRGBO(255, 204, 128, 1);
+
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
