@@ -56,6 +56,9 @@ class _ImageSliderState extends State<ImageSlider> {
             },
           ),
         ),
+        const SizedBox(
+          height: 10,
+        ),
         Container(
           margin: const EdgeInsets.only(top: 10.0),
           alignment: Alignment.center,
@@ -63,11 +66,11 @@ class _ImageSliderState extends State<ImageSlider> {
             activeIndex: widget.activeIndex,
             count: widget.images.length,
             effect: SlideEffect(
-              spacing: 8.0,
-              dotHeight: 6,
-              dotWidth: 6,
-              activeDotColor: Colors.black,
-              dotColor: Colors.black.withOpacity(0.6),
+              spacing: 5.0,
+              dotHeight: 10,
+              dotWidth: 10,
+              activeDotColor: Colors.grey,
+              dotColor: Colors.grey.withOpacity(0.6),
             ),
           ),
         ),
