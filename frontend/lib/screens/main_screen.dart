@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:frontend/widgets/image_slider.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -170,6 +172,44 @@ class MainScreen extends StatelessWidget {
                 ],
               ),
             ),
+            const SizedBox(height: 50),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.85,
+                  height: MediaQuery.of(context).size.width * 0.15,
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("근처 보호소의 최근 공고",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 20)),
+                      Row(
+                        children: [
+                          Icon(Icons.location_on_outlined),
+                          Text(
+                            "대전광역시, 유성구",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400, fontSize: 14),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ImageSlider(images: const [
+                  'assets/images/samplePuppy.jpeg',
+                  'assets/images/samplePuppy2.jpeg',
+                  'assets/images/samplePuppy3.jpeg',
+                ], activeIndex: 0),
+              ],
+            )
           ],
         ),
       ),
