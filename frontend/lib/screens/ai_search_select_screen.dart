@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/ai_select_range_screen.dart';
 import 'package:frontend/widgets/aiSearchProgress.dart';
 import 'package:frontend/models/my_missing_dog/missing_dog.dart';
 
@@ -44,12 +45,12 @@ class _AiSearchSelectScreenState extends State<AiSearchSelectScreen> {
               selectNum: 1,
             ),
             const SizedBox(
-              height: 30,
+              height: 10,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: SizedBox(
-                height: myMissingDogs.length * 200,
+                height: myMissingDogs.length * 150,
                 child: GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
@@ -67,7 +68,7 @@ class _AiSearchSelectScreenState extends State<AiSearchSelectScreen> {
                         });
                       },
                       child: Container(
-                        padding: const EdgeInsets.all(15),
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(8),
@@ -163,6 +164,23 @@ class _AiSearchSelectScreenState extends State<AiSearchSelectScreen> {
                 ),
               ),
             ),
+            const SizedBox(
+              height: 40,
+            ),
+            GestureDetector(
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AiSearchSelectRange())),
+              child: const Text(
+                "다음으로 >> ",
+                style: TextStyle(
+                  color: Color.fromRGBO(83, 83, 83, 1),
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            )
           ],
         ),
       ),

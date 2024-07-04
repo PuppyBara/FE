@@ -1,0 +1,22 @@
+import 'package:flutter/material.dart';
+import 'package:frontend/widgets/aiSearchProgress.dart';
+
+class AiSearching extends StatelessWidget {
+  const AiSearching({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: [
+          const AiSearchProgress(
+              progressText: "AI가 반려견을 찾는 중입니다.", selectNum: 3),
+          const SizedBox(
+            height: 30,
+          ),
+          Image.asset('assets/images/searchingPuppy.png'),
+        ],
+      ),
+    );
+  }
+}

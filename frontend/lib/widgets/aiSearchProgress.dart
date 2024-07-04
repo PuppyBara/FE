@@ -74,7 +74,7 @@ class AiSearchProgress extends StatelessWidget {
           ],
         ),
         const SizedBox(
-          height: 90,
+          height: 70,
         ),
         Text(
           progressText,
