@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/ai_search_result_screen.dart';
 import 'package:frontend/widgets/aiSearchProgress.dart';
 
 class AiSearching extends StatelessWidget {
@@ -15,6 +16,14 @@ class AiSearching extends StatelessWidget {
             height: 30,
           ),
           Image.asset('assets/images/searchingPuppy.png'),
+          TextButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AiSearchResultScreen()));
+              },
+              child: const Text("다음으로(임시버튼)")),
         ],
       ),
     );

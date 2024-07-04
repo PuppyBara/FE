@@ -15,6 +15,10 @@ class AiSearchProgress extends StatelessWidget {
   Widget build(BuildContext context) {
     const Color customGreen = Color.fromRGBO(132, 205, 188, 1);
     const Color customOrange = Color.fromRGBO(255, 204, 128, 1);
+
+    bool shouldHighlight =
+        progressText.contains('총') && progressText.contains('건이');
+
     return Column(
       children: [
         const SizedBox(
@@ -76,13 +80,32 @@ class AiSearchProgress extends StatelessWidget {
         const SizedBox(
           height: 70,
         ),
-        Text(
-          progressText,
-          style: const TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 25,
+        Text.rich(
+          TextSpan(
+            text: progressText.substring(0, progressText.indexOf('총') + 1),
+            style: const TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 25,
+            ),
+            children: [
+              TextSpan(
+                text: progressText.substring(progressText.indexOf('총') + 1,
+                    progressText.indexOf('건') + 1),
+                style: shouldHighlight
+                    ? const TextStyle(
+                        color: customOrange, fontWeight: FontWeight.w700)
+                    : null,
+              ),
+              TextSpan(
+                text: progressText.substring(progressText.indexOf('건') + 1),
+                style: const TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 25,
+                ),
+              ),
+            ],
           ),
-        )
+        ),
       ],
     );
   }
