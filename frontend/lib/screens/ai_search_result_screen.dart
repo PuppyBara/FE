@@ -7,7 +7,7 @@ import 'package:frontend/widgets/make_text_list.dart';
 
 List<AiResultDog> resultDogs = [
   AiResultDog(
-    id: "1",
+    id: 1,
     image: 'assets/images/samplePuppy.jpeg',
     sex: 'Male',
     dateTime: '2023-07-04T12:00:00',
@@ -17,7 +17,7 @@ List<AiResultDog> resultDogs = [
     aiType: '비문',
   ),
   AiResultDog(
-    id: "2",
+    id: 2,
     image: 'assets/images/samplePuppy2.jpeg',
     sex: 'Male',
     dateTime: '2023-07-04T12:00:00',
@@ -27,7 +27,7 @@ List<AiResultDog> resultDogs = [
     aiType: '비문',
   ),
   AiResultDog(
-    id: "3",
+    id: 3,
     image: 'assets/images/samplePuppy3.jpeg',
     sex: 'Male',
     dateTime: '2023-07-04T12:00:00',
@@ -37,7 +37,7 @@ List<AiResultDog> resultDogs = [
     aiType: '비문',
   ),
   AiResultDog(
-    id: "4",
+    id: 4,
     image: 'assets/images/samplePuppy3.jpeg',
     sex: 'Male',
     dateTime: '2023-07-04T12:00:00',
@@ -47,7 +47,7 @@ List<AiResultDog> resultDogs = [
     aiType: '비문',
   ),
   AiResultDog(
-    id: "5",
+    id: 5,
     image: 'assets/images/samplePuppy3.jpeg',
     sex: 'Male',
     dateTime: '2023-07-04T12:00:00',
@@ -102,8 +102,8 @@ class AiSearchResultScreen extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    AiResultDetailScreen(id: dog.id)));
+                                builder: (context) => AiResultDetailScreen(
+                                    id: dog.id.toString())));
                       },
                       child: Container(
                         padding: const EdgeInsets.all(10),

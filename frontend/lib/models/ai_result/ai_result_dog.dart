@@ -1,5 +1,5 @@
 class AiResultDog {
-  final String id;
+  final int id;
   final String image;
   final String sex;
   final String dateTime;
