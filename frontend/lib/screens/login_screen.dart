@@ -61,15 +61,12 @@ class LoginScreen extends StatelessWidget {
               buttonHeight: 44,
               radius: 10,
               fontSize: 20,
+              fontWeight: FontWeight.w700,
               onPressed: () {
                 final String id = idController.text.toString();
                 final String password = passwordController.text.toString();
 
-                try {
-                  
-                } catch (e) {
-                  
-                }
+                try {} catch (e) {}
               },
             )
           ],

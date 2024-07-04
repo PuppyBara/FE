@@ -8,6 +8,8 @@ class MakeTextButton extends StatelessWidget {
   final VoidCallback onPressed;
   final double radius;
   final double fontSize;
+  final FontWeight fontWeight;
+
   const MakeTextButton({
     super.key,
     required this.text,
@@ -17,6 +19,7 @@ class MakeTextButton extends StatelessWidget {
     required this.onPressed,
     required this.radius,
     required this.fontSize,
+    required this.fontWeight,
   });
 
   @override
@@ -35,9 +38,7 @@ class MakeTextButton extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w700,
-              fontSize: fontSize),
+              color: Colors.white, fontWeight: fontWeight, fontSize: fontSize),
         ));
   }
 }

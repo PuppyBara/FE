@@ -212,7 +212,10 @@ class MainScreen extends StatelessWidget {
                   'assets/images/samplePuppy3.jpeg',
                 ], activeIndex: 0),
               ],
-            )
+            ),
+            const SizedBox(
+              height: 20,
+            ),
           ],
         ),
       ),
