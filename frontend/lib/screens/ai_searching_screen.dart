@@ -8,23 +8,25 @@ class AiSearching extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          const AiSearchProgress(
-              progressText: "AI가 반려견을 찾는 중입니다.", selectNum: 3),
-          const SizedBox(
-            height: 30,
-          ),
-          Image.asset('assets/images/searchingPuppy.png'),
-          TextButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AiSearchResultScreen()));
-              },
-              child: const Text("다음으로(임시버튼)")),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const AiSearchProgress(
+                progressText: "AI가 반려견을 찾는 중입니다.", selectNum: 3),
+            const SizedBox(
+              height: 30,
+            ),
+            Image.asset('assets/images/searchingPuppy.png'),
+            TextButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AiSearchResultScreen()));
+                },
+                child: const Text("다음으로(임시버튼)")),
+          ],
+        ),
       ),
     );
   }
