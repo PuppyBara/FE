@@ -36,7 +36,11 @@ dependencies:
     cupertino_icons: ^1.0.6
     provider: ^6.1.2
     http: ^1.2.1
+<<<<<<< HEAD
     expandable: ^5.0.1
+=======
+    step_progress_indicator: ^1.0.2
+>>>>>>> feature/fe/ai-찾기
 
 dev_dependencies:
     flutter_test:

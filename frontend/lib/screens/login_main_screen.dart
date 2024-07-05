@@ -49,6 +49,7 @@ class LoginMain extends StatelessWidget {
                 buttonHeight: 96.0,
                 radius: 12,
                 fontSize: 25,
+                fontWeight: FontWeight.w700,
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -68,6 +69,7 @@ class LoginMain extends StatelessWidget {
                 buttonHeight: 96.0,
                 radius: 12,
                 fontSize: 25,
+                fontWeight: FontWeight.w700,
                 onPressed: () {
                   Navigator.push(
                     context,

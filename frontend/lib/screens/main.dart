@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/home_screen.dart';
 import 'package:frontend/screens/login_main_screen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:frontend/screens/home_screen.dart';
+
+const Color customGreen = Color.fromRGBO(132, 205, 188, 1);
+const Color customOrange = Color.fromRGBO(255, 204, 128, 1);
 
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();

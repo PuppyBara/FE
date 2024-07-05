@@ -3,8 +3,8 @@ class MissingDog {
   final String image;
   final String sex;
   final String name;
-  final String age;
-  final DateTime dateTime;
+  final int age;
+  final String dateTime;
   final String location;
 
   MissingDog(
@@ -23,7 +23,7 @@ class MissingDog {
         sex: json["sex"],
         name: json["name"],
         age: json["age"],
-        dateTime: DateTime.parse(json["dateTime"]),
+        dateTime: json["dateTime"],
         location: json["location"]);
   }
 }

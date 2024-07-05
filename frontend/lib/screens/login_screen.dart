@@ -91,14 +91,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   MakeTextButton(
-                    text: "로그인",
-                    color: personButtonColor,
-                    buttonWidth: buttonWidth,
-                    buttonHeight: 44,
-                    radius: 10,
-                    fontSize: 20,
-                    onPressed: login,
-                  )
+                      text: "로그인",
+                      color: personButtonColor,
+                      buttonWidth: buttonWidth,
+                      buttonHeight: 44,
+                      radius: 10,
+                      fontSize: 20,
+                      onPressed: login,
+                      fontWeight: FontWeight.w700)
                 ],
               ),
               const SizedBox(height: 100),
