@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/ai_search_screen.dart';
+import 'package:frontend/screens/missing_notice.dart';
+import 'package:frontend/screens/protecting_screen.dart';
+import 'package:frontend/screens/shelter_search_screen.dart';
 import 'package:frontend/widgets/accodian_main.dart';
 
 import 'package:frontend/widgets/image_slider.dart';
@@ -166,10 +170,10 @@ class MainScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  _buttonColumn(Icons.home_filled, "보호소"),
-                  _buttonColumn(Icons.circle, "AI검색"),
-                  _buttonColumn(Icons.favorite, "보호중"),
-                  _buttonColumn(Icons.bookmark, "실종공고"),
+                  _buttonColumn(Icons.home_filled, "보호소", context),
+                  _buttonColumn(Icons.circle, "AI검색", context),
+                  _buttonColumn(Icons.favorite, "보호중", context),
+                  _buttonColumn(Icons.bookmark, "실종공고", context),
                 ],
               ),
             ),
@@ -227,11 +231,38 @@ class MainScreen extends StatelessWidget {
     );
   }
 
-  Widget _buttonColumn(IconData iconData, String label) {
+  Widget _buttonColumn(IconData iconData, String label, BuildContext context) {
     return Column(
       children: [
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            if (label == '보호소') {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const ShelterSearchScreen()),
+              );
+            }
+            if (label == 'AI검색') {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AiSearchScreen()),
+              );
+            }
+            if (label == '보호중') {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const ProtectingScreen()),
+              );
+            }
+            if (label == '실종공고') {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const MissingNotice()),
+              );
+            }
+          },
           style: TextButton.styleFrom(
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             minimumSize: Size.zero,
