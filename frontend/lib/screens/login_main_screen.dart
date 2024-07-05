@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/main_screen.dart';
 import 'package:frontend/widgets/logo.dart';
 import 'package:flutter/widgets.dart';
 import 'package:frontend/screens/login_screen.dart';

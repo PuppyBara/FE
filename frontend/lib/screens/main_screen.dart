@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/widgets/accodian_main.dart';
 
 import 'package:frontend/widgets/image_slider.dart';
 
@@ -173,6 +174,10 @@ class MainScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 50),
+            const AccodianMain(),
+            const SizedBox(
+              height: 40,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -212,7 +217,10 @@ class MainScreen extends StatelessWidget {
                   'assets/images/samplePuppy3.jpeg',
                 ], activeIndex: 0),
               ],
-            )
+            ),
+            const SizedBox(
+              height: 30,
+            ),
           ],
         ),
       ),
