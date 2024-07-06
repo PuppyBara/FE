@@ -38,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final String password = passwordController.text.toString();
 
     final url = Uri.parse(
-        'http://43.200.141.126/api/member/sign-in'); // 실제 API URL로 변경하세요
+        'http://43.200.141.126/api/member/sign-in');
     final response = await http.post(
       url,
       headers: <String, String>{

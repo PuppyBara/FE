@@ -1,53 +1,78 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/models/shelter/shelter_list_model.dart';
 import 'package:frontend/screens/main.dart';
 import 'package:frontend/screens/shelter_search_result_screen.dart';
+import 'package:frontend/services/shelter_service.dart';
 import 'package:frontend/widgets/make_text_button.dart';
 
-class ShelterSearchScreen extends StatelessWidget {
+class ShelterSearchScreen extends StatefulWidget {
   const ShelterSearchScreen({super.key});
+
+  @override
+  State<ShelterSearchScreen> createState() => _ShelterSearchScreenState();
+}
+
+class _ShelterSearchScreenState extends State<ShelterSearchScreen> {
+  late Future<ShelterListModel> shelterList;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    shelterList = ShelterService().getShelters();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Center(
-            child: Text(
-              "보호소 선택",
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 20,
+          appBar: AppBar(
+            title: const Center(
+              child: Text(
+                "보호소 선택",
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 20,
+                ),
               ),
             ),
           ),
-        ),
-        body: const SheleterListWidget(),
-      ),
+          body: FutureBuilder(
+            future: shelterList,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasData) {
+                  return SheleterListWidget(shelterList: snapshot.data!);
+                } else if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                }
+              }
+              return const CircularProgressIndicator();
+            },
+          )),
     );
   }
 }
 
 class SheleterListWidget extends StatefulWidget {
-  const SheleterListWidget({super.key});
+  final ShelterListModel shelterList;
+  const SheleterListWidget({super.key, required this.shelterList});
 
   @override
   State<SheleterListWidget> createState() => _SheleterListWidgetState();
 }
 
 class _SheleterListWidgetState extends State<SheleterListWidget> {
-  final List<String> regions = ['서울', '경기', '충남'];
-  final Map<String, List<String>> shelters = {
-    '서울': ['보호소1', '보호소2'],
-    '경기': ['보호소3', '보호소4'],
-    '충남': ['보호소5', '보호소6'],
-  };
-
   late String selectedRegion;
   late String selectedShelter;
+  late List<String> regions;
+  late Map<String, List<String>> shelters;
 
   @override
   void initState() {
     super.initState();
+    regions = widget.shelterList.getAllRegions(); // 모든 지역 이름 가져오기
+    shelters = widget.shelterList.getAllSheltersByRegion(); // 지역별 보호소 리스트
     selectedRegion = regions[0];
     selectedShelter = shelters[selectedRegion]![0]; // 각 지역의 첫 번째 보호소를 기본으로 선택
   }
