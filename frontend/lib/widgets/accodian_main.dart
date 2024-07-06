@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:expandable/expandable.dart';
+import 'package:frontend/models/my_missing_dog/missing_dog_list_model.dart';
+import 'package:frontend/models/my_protected_dog/protected_dog_list_model.dart';
+import 'package:frontend/services/my_dogs_service.dart';
 
 class AccodianMain extends StatefulWidget {
   const AccodianMain({super.key});
@@ -10,6 +13,15 @@ class AccodianMain extends StatefulWidget {
 
 class _AccodianMainState extends State<AccodianMain> {
   int _expandedIndex = -1; // 현재 확장된 아코디언의 인덱스를 저장하는 변수
+  late Future<MissingDogListModel> myMissingDogs;
+  late Future<ProtectedDogList> myProtectingDog;
+
+  @override
+  void initState() {
+    super.initState();
+    myMissingDogs = MyDogsService().getMyMissingDog();
+    myProtectingDog = MyDogsService().getMyProtectingDog();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,42 +30,68 @@ class _AccodianMainState extends State<AccodianMain> {
 
     return Column(
       children: [
-        ExpandableCard(
-          header: const ExpandableCardText(
-              titleText: "등록한 실종공고", customBlack: customBlack),
-          isExpanded: _expandedIndex == 0,
-          onTap: () {
-            setState(() {
-              _expandedIndex = _expandedIndex == 0 ? -1 : 0;
-            });
-          },
-          expandedChild: const ExpandableCardContent(
-            image: 'assets/images/samplePuppy2.jpeg',
-            name: "재롱이",
-            age: "8",
-            location: "대전광역시 시청역.. 부근",
-            date: "2024-06-15",
-          ),
-        ),
+        FutureBuilder<MissingDogListModel>(
+            future: myMissingDogs,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                var dog = snapshot.data!.myMissingDogs[0];
+                return ExpandableCard(
+                  header: const ExpandableCardText(
+                      titleText: "등록한 실종공고", customBlack: customBlack),
+                  isExpanded: _expandedIndex == 0,
+                  onTap: () {
+                    setState(() {
+                      _expandedIndex = _expandedIndex == 0 ? -1 : 0;
+                    });
+                  },
+                  expandedChild: ExpandableCardContent(
+                    image: dog.image,
+                    name: dog.name,
+                    age: dog.age,
+                    location: dog.location,
+                    date: dog.dateTime.substring(0, 10),
+                  ),
+                );
+              } else if (snapshot.hasError) {
+                return Text("Error: ${snapshot.error}");
+              } else if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              } else {
+                return const Text("No data");
+              }
+            }),
         const SizedBox(height: 10),
-        ExpandableCard(
-          header: const ExpandableCardText(
-            titleText: "등록한 보호동물",
-            customBlack: customBlack,
-          ),
-          isExpanded: _expandedIndex == 1,
-          onTap: () {
-            setState(() {
-              _expandedIndex = _expandedIndex == 1 ? -1 : 1;
-            });
-          },
-          expandedChild: const ExpandableCardContent(
-            image: 'assets/images/samplePuppy2.jpeg',
-            name: "재롱이",
-            location: "대전광역시 시청역.. 부근",
-            date: "2024-06-15",
-          ),
-        ),
+        FutureBuilder<MissingDogListModel>(
+            future: myMissingDogs,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                var dog = snapshot.data!.myMissingDogs[0];
+                return ExpandableCard(
+                  header: const ExpandableCardText(
+                    titleText: "등록한 보호동물",
+                    customBlack: customBlack,
+                  ),
+                  isExpanded: _expandedIndex == 1,
+                  onTap: () {
+                    setState(() {
+                      _expandedIndex = _expandedIndex == 1 ? -1 : 1;
+                    });
+                  },
+                  expandedChild: ExpandableCardContent(
+                    image: dog.image,
+                    name: dog.name,
+                    location: dog.location,
+                    date: dog.dateTime.substring(0, 10),
+                  ),
+                );
+              } else if (snapshot.hasError) {
+                return Text("Error: ${snapshot.error}");
+              } else if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              } else {
+                return const Text("No data");
+              }
+            }),
       ],
     );
   }
@@ -70,7 +108,7 @@ class ExpandableCardContent extends StatelessWidget {
   });
 
   final String image;
-  final String? age;
+  final int? age;
   final String name;
   final String date;
   final String location;
@@ -100,10 +138,11 @@ class ExpandableCardContent extends StatelessWidget {
             children: [
               ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  child: Image.asset(
+                  child: Image.network(
                     image,
-                    fit: BoxFit.contain,
-                    height: 93,
+                    fit: BoxFit.fill,
+                    width: 127,
+                    height: 80,
                   )),
               const SizedBox(
                 width: 10,
