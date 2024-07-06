@@ -5,7 +5,7 @@ import 'package:frontend/services/getAccessToken.dart';
 import 'package:http/http.dart' as http;
 
 class ShelterService {
-  Future<List<ShelterDog>> postShelterDogs(List<int> list) async {
+  Future<List<ShelterDog>> postShelterDogs(List<String> list) async {
     const baseUrl = 'http://43.200.141.126/api';
     final token = getAccessToken();
 

@@ -67,6 +67,7 @@ class _SheleterListWidgetState extends State<SheleterListWidget> {
   late String selectedShelter;
   late List<String> regions;
   late Map<String, List<String>> shelters;
+  late List<String> list;
 
   @override
   void initState() {
@@ -75,6 +76,7 @@ class _SheleterListWidgetState extends State<SheleterListWidget> {
     shelters = widget.shelterList.getAllSheltersByRegion(); // 지역별 보호소 리스트
     selectedRegion = regions[0];
     selectedShelter = shelters[selectedRegion]![0]; // 각 지역의 첫 번째 보호소를 기본으로 선택
+    list = [];
   }
 
   @override
@@ -181,11 +183,12 @@ class _SheleterListWidgetState extends State<SheleterListWidget> {
           buttonWidth: 378,
           buttonHeight: 52,
           onPressed: () {
+            list.add(selectedShelter);
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => ShelterSearchResultScreen(
-                  selectedShelter: selectedShelter,
+                  selectedShelter: list,
                 ),
               ),
             );

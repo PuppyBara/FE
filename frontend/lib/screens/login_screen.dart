@@ -37,8 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final String id = idController.text.toString();
     final String password = passwordController.text.toString();
 
-    final url = Uri.parse(
-        'http://43.200.141.126/api/member/sign-in');
+    final url = Uri.parse('http://43.200.141.126/api/member/sign-in');
     final response = await http.post(
       url,
       headers: <String, String>{
