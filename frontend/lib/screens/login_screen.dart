@@ -1,10 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/home_screen.dart';
 import 'package:frontend/screens/search_pw_screen.dart';
 import 'package:frontend/widgets/input_form.dart';
 import 'package:frontend/widgets/logo.dart';
 import 'package:frontend/widgets/make_text_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatefulWidget {
@@ -26,6 +28,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool isExistMember = true;
 
+  void saveAccessToken(String token) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('accessToken', token);
+  }
+
   void login() async {
     final String id = idController.text.toString();
     final String password = passwordController.text.toString();
@@ -45,7 +52,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
-      print('Login successful: $responseData');
+      String accessToken = responseData['accessToken'];
+      saveAccessToken(accessToken);
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (contetxt) => const HomeScreen()));
+      print('Login successful: $accessToken');
     } else {
       print('Login failed: ${response.body}');
       setState(() {
