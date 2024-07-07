@@ -107,13 +107,13 @@ class _AiSearchSelectScreenState extends State<AiSearchSelectScreen> {
                                           margin: const EdgeInsets.all(
                                               4), // 아이콘과 이미지 경계의 여백
                                           decoration: BoxDecoration(
-                                            color: dog.sex == 'Female'
+                                            color: dog.sex == 'FEMALE'
                                                 ? customGreen
                                                 : customOrange, // 아이콘 배경색
                                             shape: BoxShape.circle, // 원형으로 만들기
                                           ),
                                           child: Icon(
-                                            dog.sex == 'Female'
+                                            dog.sex == 'FEMALE'
                                                 ? MyFlutterApp.vector
                                                 : MyFlutterApp.vector__1_,
                                             color: Colors.white,

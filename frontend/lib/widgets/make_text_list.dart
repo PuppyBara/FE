@@ -19,12 +19,15 @@ class MakeTextList extends StatelessWidget {
           textIcon,
           size: 13,
         ),
-        Text(
-          title,
-          style: const TextStyle(
-              fontWeight: FontWeight.w400,
-              fontSize: 12,
-              color: Color.fromRGBO(58, 58, 58, 1)),
+        Expanded(
+          child: Text(
+            title,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: 12,
+                color: Color.fromRGBO(58, 58, 58, 1)),
+          ),
         ),
       ],
     );

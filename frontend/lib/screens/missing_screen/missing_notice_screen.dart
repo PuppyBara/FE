@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/ai_result/ai_result_dog.dart';
+import 'package:frontend/models/missingdog_id/missing_dog_model.dart';
 import 'package:frontend/my_flutter_app_icons.dart';
 import 'package:frontend/screens/home_screen.dart';
 import 'package:frontend/screens/main.dart';
@@ -8,61 +9,9 @@ import 'package:frontend/screens/missing_screen/missing_add_screen.dart';
 import 'package:frontend/screens/my_screen.dart';
 import 'package:frontend/screens/protect_screen/protect_add_screen.dart';
 import 'package:frontend/screens/shelter_screen/shelter_search_screen.dart';
+import 'package:frontend/services/missing_dog_service.dart';
 import 'package:frontend/widgets/bottom_bar.dart';
 import 'package:frontend/widgets/make_text_list.dart';
-
-List<AiResultDog> resultDogs = [
-  AiResultDog(
-    id: 1,
-    image: 'assets/images/samplePuppy.jpeg',
-    sex: 'Male',
-    dateTime: '2023-07-04T12:00:00',
-    location: '서구 갈마동',
-    whoProtected: '개인 임시보호중',
-    percentage: 99,
-    aiType: '비문',
-  ),
-  AiResultDog(
-    id: 2,
-    image: 'assets/images/samplePuppy2.jpeg',
-    sex: 'Male',
-    dateTime: '2023-07-04T12:00:00',
-    location: '동구 유천동',
-    whoProtected: '대전광역시 동물보호센터',
-    percentage: 95,
-    aiType: '비문',
-  ),
-  AiResultDog(
-    id: 3,
-    image: 'assets/images/samplePuppy3.jpeg',
-    sex: 'Female',
-    dateTime: '2023-07-04T12:00:00',
-    location: '동구 은행동',
-    whoProtected: '개인 임시보호중',
-    percentage: 80,
-    aiType: '비문',
-  ),
-  AiResultDog(
-    id: 4,
-    image: 'assets/images/samplePuppy3.jpeg',
-    sex: 'Female',
-    dateTime: '2023-07-04T12:00:00',
-    location: '동구 은행동',
-    whoProtected: '개인 임시보호중',
-    percentage: 80,
-    aiType: '비문',
-  ),
-  AiResultDog(
-    id: 5,
-    image: 'assets/images/samplePuppy3.jpeg',
-    sex: 'Male',
-    dateTime: '2023-07-04T12:00:00',
-    location: '동구 은행동',
-    whoProtected: '개인 임시보호중',
-    percentage: 80,
-    aiType: '비문',
-  ),
-];
 
 class MissingNoticeScreen extends StatefulWidget {
   const MissingNoticeScreen({super.key});
@@ -75,6 +24,14 @@ class MissingNoticeScreen extends StatefulWidget {
 
 class _MissingNoticeScreenState extends State<MissingNoticeScreen> {
   int _selectedIndex = 0;
+  late Future<MissingDogModel> missingDogs;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    missingDogs = MissingDogService().getMissingDogs();
+  }
 
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
@@ -177,95 +134,104 @@ class _MissingNoticeScreenState extends State<MissingNoticeScreen> {
                 )
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 15,
-                vertical: 0,
-              ),
-              child: SizedBox(
-                height: resultDogs.length * 140,
-                child: GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10,
-                    childAspectRatio: 0.95,
-                  ),
-                  itemCount: resultDogs.length,
-                  itemBuilder: (context, index) {
-                    final dog = resultDogs[index];
-                    return Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Color.fromRGBO(0, 0, 0, 0.08),
-                            spreadRadius: 2,
-                            blurRadius: 28,
-                            offset: Offset(0, 4),
-                          ),
-                        ],
+            FutureBuilder(
+                future: missingDogs,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    var resultDogs = snapshot.data!.missingDogs;
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 15,
+                        vertical: 0,
                       ),
-                      child: Column(
-                        children: [
-                          Stack(
-                            alignment: Alignment.bottomRight,
-                            children: [
-                              AspectRatio(
-                                aspectRatio: 1.7,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  child: Image.asset(
-                                    dog.image,
-                                    fit: BoxFit.cover,
+                      child: SizedBox(
+                        height: resultDogs.length * 140,
+                        child: GridView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 10,
+                            childAspectRatio: 0.95,
+                          ),
+                          itemCount: resultDogs.length,
+                          itemBuilder: (context, index) {
+                            final dog = resultDogs[index];
+                            return Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Color.fromRGBO(0, 0, 0, 0.08),
+                                    spreadRadius: 2,
+                                    blurRadius: 28,
+                                    offset: Offset(0, 4),
                                   ),
-                                ),
+                                ],
                               ),
-                              Container(
-                                padding: const EdgeInsets.all(8),
-                                margin:
-                                    const EdgeInsets.all(4), // 아이콘과 이미지 경계의 여백
-                                decoration: BoxDecoration(
-                                  color: dog.sex == 'Female'
-                                      ? customGreen
-                                      : customOrange, // 아이콘 배경색
-                                  shape: BoxShape.circle, // 원형으로 만들기
-                                ),
-                                child: Icon(
-                                  dog.sex == 'Female'
-                                      ? MyFlutterApp.vector
-                                      : MyFlutterApp.vector__1_,
-                                  color: Colors.white,
-                                  size: 12,
-                                ),
+                              child: Column(
+                                children: [
+                                  Stack(
+                                    alignment: Alignment.bottomRight,
+                                    children: [
+                                      AspectRatio(
+                                        aspectRatio: 1.7,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                          child: Image.network(
+                                            dog.image,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: const EdgeInsets.all(8),
+                                        margin: const EdgeInsets.all(
+                                            4), // 아이콘과 이미지 경계의 여백
+                                        decoration: BoxDecoration(
+                                          color: dog.sex == 'FEMALE'
+                                              ? customGreen
+                                              : customOrange, // 아이콘 배경색
+                                          shape: BoxShape.circle, // 원형으로 만들기
+                                        ),
+                                        child: Icon(
+                                          dog.sex == 'FEMALE'
+                                              ? MyFlutterApp.vector
+                                              : MyFlutterApp.vector__1_,
+                                          color: Colors.white,
+                                          size: 12,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  MakeTextList(
+                                    title: ' ${dog.location}',
+                                    textIcon: Icons.info_outline,
+                                  ),
+                                  MakeTextList(
+                                    title:
+                                        ' ${dog.dateTime.substring(0, 10)}부근',
+                                    textIcon: Icons.calendar_month_outlined,
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          MakeTextList(
-                            title: ' ${dog.location}',
-                            textIcon: Icons.info_outline,
-                          ),
-                          MakeTextList(
-                            title: ' ${dog.dateTime.substring(0, 10)}구조',
-                            textIcon: Icons.calendar_month_outlined,
-                          ),
-                          MakeTextList(
-                            title: ' ${dog.whoProtected}',
-                            textIcon: Icons.location_on_outlined,
-                          ),
-                        ],
+                            );
+                          },
+                        ),
                       ),
                     );
-                  },
-                ),
-              ),
-            ),
+                  } else if (snapshot.hasError) {
+                    return const Text("강아지 실종 공고 렌더링 실패");
+                  }
+                  return const Center(child: CircularProgressIndicator());
+                }),
           ],
         ),
       ),
