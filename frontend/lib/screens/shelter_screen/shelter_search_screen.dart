@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/shelter/shelter_list_model.dart';
 import 'package:frontend/screens/main.dart';
-import 'package:frontend/screens/shelter_search_result_screen.dart';
+import 'package:frontend/screens/shelter_screen/shelter_search_result_screen.dart';
 import 'package:frontend/services/shelter_service.dart';
 import 'package:frontend/widgets/make_text_button.dart';
 

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:frontend/models/my_missing_dog/missing_dog.dart';
 import 'package:frontend/models/my_missing_dog/missing_dog_list_model.dart';
 import 'package:frontend/models/my_protected_dog/protected_dog_list_model.dart';
-import 'package:frontend/screens/ai_search_select_screen.dart';
+import 'package:frontend/screens/ai_screen/ai_search_select_screen.dart';
 import 'package:frontend/services/getAccessToken.dart';
 import 'package:http/http.dart' as http;
 

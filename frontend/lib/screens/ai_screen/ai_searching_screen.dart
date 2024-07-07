@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:frontend/screens/ai_search_result_screen.dart';
+import 'package:frontend/screens/ai_screen/ai_search_result_screen.dart';
 import 'package:frontend/widgets/aiSearchProgress.dart';
 import 'package:lottie/lottie.dart';
 

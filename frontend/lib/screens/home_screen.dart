@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/ai_search_screen.dart';
+import 'package:frontend/screens/ai_screen/ai_search_screen.dart';
 import 'package:frontend/screens/main_screen.dart';
-import 'package:frontend/screens/shelter_search_screen.dart';
+import 'package:frontend/screens/shelter_screen/shelter_search_screen.dart';
 import 'package:frontend/widgets/bottom_bar.dart';
 import 'package:frontend/screens/my_screen.dart';
 

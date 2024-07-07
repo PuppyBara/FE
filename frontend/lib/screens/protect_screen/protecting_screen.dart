@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/ai_result/ai_result_dog.dart';
+import 'package:frontend/models/my_missing_dog/missing_dog.dart';
+import 'package:frontend/screens/ai_screen/ai_search_screen.dart';
 import 'package:frontend/screens/home_screen.dart';
 import 'package:frontend/screens/main.dart';
 import 'package:frontend/screens/main_screen.dart';
-import 'package:frontend/screens/missing_add_screen.dart';
 import 'package:frontend/screens/my_screen.dart';
-import 'package:frontend/screens/protect_add_screen.dart';
-import 'package:frontend/screens/shelter_search_screen.dart';
+import 'package:frontend/screens/protect_screen/protect_add_screen.dart';
+import 'package:frontend/screens/shelter_screen/shelter_search_screen.dart';
 import 'package:frontend/widgets/bottom_bar.dart';
 import 'package:frontend/widgets/make_text_list.dart';
 
@@ -63,16 +64,16 @@ List<AiResultDog> resultDogs = [
   ),
 ];
 
-class MissingNoticeScreen extends StatefulWidget {
-  const MissingNoticeScreen({super.key});
+class ProtectingScreen extends StatefulWidget {
+  const ProtectingScreen({super.key});
   static const hsbaColor = Color.fromRGBO(59, 59, 59, 0.23);
   static const customGrey = Color.fromRGBO(240, 240, 240, 1);
 
   @override
-  State<MissingNoticeScreen> createState() => _MissingNoticeScreenState();
+  State<ProtectingScreen> createState() => _ProtectingScreenState();
 }
 
-class _MissingNoticeScreenState extends State<MissingNoticeScreen> {
+class _ProtectingScreenState extends State<ProtectingScreen> {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
@@ -102,7 +103,7 @@ class _MissingNoticeScreenState extends State<MissingNoticeScreen> {
               height: 80,
             ),
             const Text(
-              "실종공고",
+              "보호중입니다.",
               style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
             ),
             const SizedBox(
@@ -139,7 +140,7 @@ class _MissingNoticeScreenState extends State<MissingNoticeScreen> {
                       "지역/품종을 입력하세요.",
                       style: TextStyle(
                         fontSize: 16,
-                        color: MissingNoticeScreen.hsbaColor,
+                        color: ProtectingScreen.hsbaColor,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -161,7 +162,7 @@ class _MissingNoticeScreenState extends State<MissingNoticeScreen> {
               children: [
                 Icon(Icons.circle),
                 Text(
-                  "최근에 등록된 공고에요.",
+                  "최근에 보호소 및 게시판에 등록된 공고에요.",
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 15,
@@ -241,13 +242,13 @@ class _MissingNoticeScreenState extends State<MissingNoticeScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // 버튼 클릭시 수행할 액션 작성
-
+          print('버튼클릭');
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => const MissingAddScreen()));
+                  builder: (context) => const ProtectAddScreen()));
         },
-        backgroundColor: customOrange,
+        backgroundColor: customGreen,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(100.0))),
         child: const Icon(

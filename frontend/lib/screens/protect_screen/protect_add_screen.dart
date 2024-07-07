@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -5,15 +7,16 @@ import 'package:flutter/widgets.dart';
 import 'package:frontend/screens/main.dart';
 import 'package:frontend/widgets/input_form.dart';
 import 'package:frontend/widgets/make_text_button.dart';
+import 'package:image_picker/image_picker.dart';
 
-class MissingAddScreen extends StatefulWidget {
-  const MissingAddScreen({super.key});
+class ProtectAddScreen extends StatefulWidget {
+  const ProtectAddScreen({super.key});
 
   @override
-  State<MissingAddScreen> createState() => _MissingAddScreenState();
+  State<ProtectAddScreen> createState() => _ProtectAddScreenState();
 }
 
-class _MissingAddScreenState extends State<MissingAddScreen> {
+class _ProtectAddScreenState extends State<ProtectAddScreen> {
   final Color customGrey = const Color.fromRGBO(217, 217, 217, 1);
 
   final TextEditingController kindController = TextEditingController();
@@ -21,8 +24,25 @@ class _MissingAddScreenState extends State<MissingAddScreen> {
   final TextEditingController characteristic = TextEditingController();
   final TextEditingController location = TextEditingController();
   final TextEditingController dateController = TextEditingController();
-  final TextEditingController name = TextEditingController();
-  final TextEditingController age = TextEditingController();
+
+  final ImagePicker _picker = ImagePicker();
+  XFile? _image;
+
+  Future<void> _pickImage() async {
+    try {
+      final XFile? pickedFile =
+          await _picker.pickImage(source: ImageSource.gallery);
+      print("업로드 시도");
+      if (pickedFile != null) {
+        print("성공");
+        setState(() {
+          _image = pickedFile;
+        });
+      }
+    } catch (e) {
+      print('Image picker error: $e');
+    }
+  }
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -34,7 +54,7 @@ class _MissingAddScreenState extends State<MissingAddScreen> {
         return Theme(
           data: ThemeData.light().copyWith(
             colorScheme: const ColorScheme.light(
-              primary: customOrange, // header background color
+              primary: customGreen, // header background color
               onPrimary: Colors.white, // header text color
               onSurface: Colors.black, // body text color
             ),
@@ -106,15 +126,24 @@ class _MissingAddScreenState extends State<MissingAddScreen> {
                     color: customGrey, // 회색 배경 색상
                     borderRadius: BorderRadius.circular(12), // 모서리 둥글게 처리
                   ),
-                  child: IconButton(
-                    icon: const Icon(Icons.add_circle_sharp), // '+' 아이콘 추가
-                    iconSize: 96, // 아이콘 크기 설정
-                    color: Colors.white, // 아이콘 색상 설정
-                    onPressed: () {
-                      // 버튼 클릭시 수행할 액션 작성
-                      print('Add button pressed');
-                    },
-                  ),
+                  child: _image == null
+                      ? IconButton(
+                          icon:
+                              const Icon(Icons.add_circle_sharp), // '+' 아이콘 추가
+                          iconSize: 96, // 아이콘 크기 설정
+                          color: Colors.white, // 아이콘 색상 설정
+                          onPressed: () {
+                            _pickImage();
+                          },
+                        )
+                      : ClipRRect(
+                          borderRadius:
+                              BorderRadius.circular(12), // 이미지의 모서리 둥글게 처리
+                          child: Image.file(
+                            File(_image!.path), // 이미지 파일
+                            fit: BoxFit.cover, // 이미지가 컨테이너를 꽉 채우도록 설정
+                          ),
+                        ),
                 ),
               ),
               const SizedBox(
@@ -135,82 +164,6 @@ class _MissingAddScreenState extends State<MissingAddScreen> {
               ),
               const Divider(
                 height: 1,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "이름",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700, fontSize: 14),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.7,
-                        height: 48,
-                        child: TextField(
-                          controller: name,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: customGrey, width: 1.0), // 일반 상태의 테두리
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: customGrey, width: 2.0), // 포커스 상태의 테두리
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "나이",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700, fontSize: 14),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.7,
-                        height: 48,
-                        child: TextField(
-                          controller: age,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: customGrey, width: 1.0), // 일반 상태의 테두리
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: customGrey, width: 2.0), // 포커스 상태의 테두리
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
               ),
               const SizedBox(
                 height: 20,
@@ -271,7 +224,10 @@ class _MissingAddScreenState extends State<MissingAddScreen> {
                                   color: customGrey,
                                   borderRadius: BorderRadius.circular(5)),
                               child: IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    _pickImage();
+                                    print("눌렀엉");
+                                  },
                                   icon: const Icon(Icons.man)),
                             ),
                             const SizedBox(
@@ -431,7 +387,7 @@ class _MissingAddScreenState extends State<MissingAddScreen> {
                 children: [
                   Icon(Icons.circle),
                   Text(
-                    "실종정보",
+                    "구조정보",
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
                   )
                 ],
@@ -452,7 +408,7 @@ class _MissingAddScreenState extends State<MissingAddScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        "실종 장소",
+                        "구조 장소",
                         style: TextStyle(
                             fontWeight: FontWeight.w700, fontSize: 14),
                       ),
@@ -490,7 +446,7 @@ class _MissingAddScreenState extends State<MissingAddScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        "실종 날짜",
+                        "구조 날짜",
                         style: TextStyle(
                             fontWeight: FontWeight.w700, fontSize: 14),
                       ),
@@ -532,7 +488,7 @@ class _MissingAddScreenState extends State<MissingAddScreen> {
               ),
               MakeTextButton(
                 text: "저장하기",
-                color: customOrange,
+                color: customGreen,
                 buttonWidth: MediaQuery.of(context).size.width * 0.7,
                 buttonHeight: 39,
                 onPressed: () {},

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/ai_search_select_screen.dart';
+import 'package:frontend/screens/ai_screen/ai_search_select_screen.dart';
 import 'package:frontend/screens/main.dart';
 import 'package:frontend/widgets/image_slider.dart';
 import 'package:frontend/widgets/make_text_button.dart';

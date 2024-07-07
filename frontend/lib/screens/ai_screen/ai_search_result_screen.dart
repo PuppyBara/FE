@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:frontend/screens/ai_result_detail_screen.dart';
+import 'package:frontend/screens/ai_screen/ai_result_detail_screen.dart';
 import 'package:frontend/widgets/aiSearchProgress.dart';
 import 'package:frontend/models/ai_result/aI_result_dog.dart';
 import 'package:frontend/widgets/make_text_list.dart';

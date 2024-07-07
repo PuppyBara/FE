@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/ai_search_screen.dart';
-import 'package:frontend/screens/missing_notice_screen.dart';
-import 'package:frontend/screens/protecting_screen.dart';
-import 'package:frontend/screens/shelter_search_screen.dart';
+import 'package:frontend/screens/ai_screen/ai_search_screen.dart';
+import 'package:frontend/screens/missing_screen/missing_notice_screen.dart';
+import 'package:frontend/screens/protect_screen/protecting_screen.dart';
+import 'package:frontend/screens/shelter_screen/shelter_search_screen.dart';
 import 'package:frontend/widgets/accodian_main.dart';
 
 import 'package:frontend/widgets/image_slider.dart';

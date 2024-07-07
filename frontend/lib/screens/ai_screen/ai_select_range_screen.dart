@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/ai_searching_screen.dart';
+import 'package:frontend/screens/ai_screen/ai_searching_screen.dart';
 import 'package:frontend/screens/main.dart';
 import 'package:frontend/widgets/aiSearchProgress.dart';
 

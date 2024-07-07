@@ -4,6 +4,8 @@
 	<dict>
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>강아지 사진 업로드를 위해 갤러리 접근이 필요합니다.</string>
 		<key>CFBundleDisplayName</key>
 		<string>Frontend</string>
 		<key>CFBundleExecutable</key>

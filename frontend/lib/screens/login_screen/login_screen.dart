@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/home_screen.dart';
-import 'package:frontend/screens/search_pw_screen.dart';
+import 'package:frontend/screens/login_screen/search_pw_screen.dart';
 import 'package:frontend/widgets/input_form.dart';
 import 'package:frontend/widgets/logo.dart';
 import 'package:frontend/widgets/make_text_button.dart';

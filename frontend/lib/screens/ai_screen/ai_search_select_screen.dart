@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/ai_select_range_screen.dart';
+import 'package:frontend/screens/ai_screen/ai_select_range_screen.dart';
 import 'package:frontend/widgets/aiSearchProgress.dart';
 import 'package:frontend/models/my_missing_dog/missing_dog.dart';
 
