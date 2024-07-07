@@ -37,43 +37,56 @@ class AiSearchProgress extends StatelessWidget {
           height: 30,
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            StepProgressIndicator(
-              totalSteps: 1,
-              currentStep: 1,
-              selectedColor: selectNum == 1 ? customOrange : customGreen,
-              size: 6,
-              roundedEdges: const Radius.circular(17),
+            SizedBox(
+              width: 17,
+              child: StepProgressIndicator(
+                totalSteps: 1,
+                currentStep: 1,
+                selectedColor: selectNum == 1 ? customOrange : customGreen,
+                size: 6,
+                roundedEdges: const Radius.circular(17),
+              ),
             ),
             const SizedBox(
-              width: 10,
+              width: 5,
             ),
-            StepProgressIndicator(
-              totalSteps: 1,
-              currentStep: 1,
-              selectedColor: selectNum == 2 ? customOrange : customGreen,
-              size: 6,
-              roundedEdges: const Radius.circular(17),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            StepProgressIndicator(
-              totalSteps: 1,
-              currentStep: 1,
-              selectedColor: selectNum == 3 ? customOrange : customGreen,
-              size: 6,
-              roundedEdges: const Radius.circular(17),
+            SizedBox(
+              width: 17,
+              child: StepProgressIndicator(
+                totalSteps: 1,
+                currentStep: 1,
+                selectedColor: selectNum == 2 ? customOrange : customGreen,
+                size: 6,
+                roundedEdges: const Radius.circular(17),
+              ),
             ),
             const SizedBox(
-              width: 10,
+              width: 5,
             ),
-            StepProgressIndicator(
-              totalSteps: 1,
-              currentStep: 1,
-              selectedColor: selectNum == 4 ? customOrange : customGreen,
-              size: 6,
-              roundedEdges: const Radius.circular(17),
+            SizedBox(
+              width: 17,
+              child: StepProgressIndicator(
+                totalSteps: 1,
+                currentStep: 1,
+                selectedColor: selectNum == 3 ? customOrange : customGreen,
+                size: 6,
+                roundedEdges: const Radius.circular(17),
+              ),
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            SizedBox(
+              width: 17,
+              child: StepProgressIndicator(
+                totalSteps: 1,
+                currentStep: 1,
+                selectedColor: selectNum == 4 ? customOrange : customGreen,
+                size: 6,
+                roundedEdges: const Radius.circular(17),
+              ),
             ),
           ],
         ),
