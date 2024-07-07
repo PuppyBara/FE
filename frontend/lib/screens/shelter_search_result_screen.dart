@@ -120,7 +120,7 @@ class ShelterAnnounceWidget extends StatelessWidget {
                                         borderRadius:
                                             BorderRadius.circular(12.0),
                                         child: Image.asset(
-                                          resultDogs.shelterDogInfo.image,
+                                          dog.shelterDogInfo.image,
                                           fit: BoxFit.cover,
                                         ),
                                       ),
@@ -129,15 +129,16 @@ class ShelterAnnounceWidget extends StatelessWidget {
                                       height: 20,
                                     ),
                                     MakeTextList(
-                                      title: ' ${resultDogs.noticeSdt}에서 발견',
+                                      title: ' ${dog.etcInfo.location}에서 발견',
                                       textIcon: Icons.info_outline,
                                     ),
                                     MakeTextList(
-                                      title: ' ${resultDogs.noticeSdt}구조',
+                                      title:
+                                          ' ${dog.etcInfo.dateTime.toString().substring(0, 10)}구조',
                                       textIcon: Icons.calendar_month_outlined,
                                     ),
                                     MakeTextList(
-                                      title: ' ${resultDogs.whoProtected}',
+                                      title: ' ${dog.shelterInfo.name}',
                                       textIcon: Icons.location_on_outlined,
                                     ),
                                   ],
@@ -154,9 +155,8 @@ class ShelterAnnounceWidget extends StatelessWidget {
             );
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
           }
+          return const Center(child: CircularProgressIndicator());
         });
   }
 }
