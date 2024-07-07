@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/ai_search_screen.dart';
-import 'package:frontend/screens/missing_notice.dart';
+import 'package:frontend/screens/missing_notice_screen.dart';
 import 'package:frontend/screens/protecting_screen.dart';
 import 'package:frontend/screens/shelter_search_screen.dart';
 import 'package:frontend/widgets/accodian_main.dart';
@@ -259,7 +259,8 @@ class MainScreen extends StatelessWidget {
             if (label == '실종공고') {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const MissingNotice()),
+                MaterialPageRoute(
+                    builder: (context) => const MissingNoticeScreen()),
               );
             }
           },

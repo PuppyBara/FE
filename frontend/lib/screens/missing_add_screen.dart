@@ -6,14 +6,14 @@ import 'package:frontend/screens/main.dart';
 import 'package:frontend/widgets/input_form.dart';
 import 'package:frontend/widgets/make_text_button.dart';
 
-class ProtectAddScreen extends StatefulWidget {
-  const ProtectAddScreen({super.key});
+class MissingAddScreen extends StatefulWidget {
+  const MissingAddScreen({super.key});
 
   @override
-  State<ProtectAddScreen> createState() => _ProtectAddScreenState();
+  State<MissingAddScreen> createState() => _MissingAddScreenState();
 }
 
-class _ProtectAddScreenState extends State<ProtectAddScreen> {
+class _MissingAddScreenState extends State<MissingAddScreen> {
   final Color customGrey = const Color.fromRGBO(217, 217, 217, 1);
 
   final TextEditingController kindController = TextEditingController();
@@ -21,6 +21,8 @@ class _ProtectAddScreenState extends State<ProtectAddScreen> {
   final TextEditingController characteristic = TextEditingController();
   final TextEditingController location = TextEditingController();
   final TextEditingController dateController = TextEditingController();
+  final TextEditingController name = TextEditingController();
+  final TextEditingController age = TextEditingController();
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -32,7 +34,7 @@ class _ProtectAddScreenState extends State<ProtectAddScreen> {
         return Theme(
           data: ThemeData.light().copyWith(
             colorScheme: const ColorScheme.light(
-              primary: customGreen, // header background color
+              primary: customOrange, // header background color
               onPrimary: Colors.white, // header text color
               onSurface: Colors.black, // body text color
             ),
@@ -133,6 +135,82 @@ class _ProtectAddScreenState extends State<ProtectAddScreen> {
               ),
               const Divider(
                 height: 1,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "이름",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700, fontSize: 14),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.7,
+                        height: 48,
+                        child: TextField(
+                          controller: name,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: customGrey, width: 1.0), // 일반 상태의 테두리
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: customGrey, width: 2.0), // 포커스 상태의 테두리
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "나이",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700, fontSize: 14),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.7,
+                        height: 48,
+                        child: TextField(
+                          controller: age,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: customGrey, width: 1.0), // 일반 상태의 테두리
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: customGrey, width: 2.0), // 포커스 상태의 테두리
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 20,
@@ -353,7 +431,7 @@ class _ProtectAddScreenState extends State<ProtectAddScreen> {
                 children: [
                   Icon(Icons.circle),
                   Text(
-                    "구조정보",
+                    "실종정보",
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
                   )
                 ],
@@ -374,7 +452,7 @@ class _ProtectAddScreenState extends State<ProtectAddScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        "구조 장소",
+                        "실종 장소",
                         style: TextStyle(
                             fontWeight: FontWeight.w700, fontSize: 14),
                       ),
@@ -412,7 +490,7 @@ class _ProtectAddScreenState extends State<ProtectAddScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        "구조 날짜",
+                        "실종 날짜",
                         style: TextStyle(
                             fontWeight: FontWeight.w700, fontSize: 14),
                       ),
@@ -454,7 +532,7 @@ class _ProtectAddScreenState extends State<ProtectAddScreen> {
               ),
               MakeTextButton(
                 text: "저장하기",
-                color: customGreen,
+                color: customOrange,
                 buttonWidth: MediaQuery.of(context).size.width * 0.7,
                 buttonHeight: 39,
                 onPressed: () {},

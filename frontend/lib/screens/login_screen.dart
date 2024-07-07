@@ -38,6 +38,9 @@ class _LoginScreenState extends State<LoginScreen> {
     final String password = passwordController.text.toString();
 
     final url = Uri.parse('http://43.200.141.126/api/member/sign-in');
+
+    print('주소$url');
+
     final response = await http.post(
       url,
       headers: <String, String>{
@@ -48,6 +51,8 @@ class _LoginScreenState extends State<LoginScreen> {
         'password': password,
       }),
     );
+
+    print("결과${response.statusCode}");
 
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);

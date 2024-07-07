@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/ai_result/ai_result_dog.dart';
-import 'package:frontend/models/my_missing_dog/missing_dog.dart';
-import 'package:frontend/screens/ai_search_screen.dart';
 import 'package:frontend/screens/home_screen.dart';
 import 'package:frontend/screens/main.dart';
 import 'package:frontend/screens/main_screen.dart';
+import 'package:frontend/screens/missing_add_screen.dart';
 import 'package:frontend/screens/my_screen.dart';
 import 'package:frontend/screens/protect_add_screen.dart';
 import 'package:frontend/screens/shelter_search_screen.dart';
@@ -64,16 +63,16 @@ List<AiResultDog> resultDogs = [
   ),
 ];
 
-class ProtectingScreen extends StatefulWidget {
-  const ProtectingScreen({super.key});
+class MissingNoticeScreen extends StatefulWidget {
+  const MissingNoticeScreen({super.key});
   static const hsbaColor = Color.fromRGBO(59, 59, 59, 0.23);
   static const customGrey = Color.fromRGBO(240, 240, 240, 1);
 
   @override
-  State<ProtectingScreen> createState() => _ProtectingScreenState();
+  State<MissingNoticeScreen> createState() => _MissingNoticeScreenState();
 }
 
-class _ProtectingScreenState extends State<ProtectingScreen> {
+class _MissingNoticeScreenState extends State<MissingNoticeScreen> {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
@@ -103,7 +102,7 @@ class _ProtectingScreenState extends State<ProtectingScreen> {
               height: 80,
             ),
             const Text(
-              "보호중입니다.",
+              "실종공고",
               style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
             ),
             const SizedBox(
@@ -140,7 +139,7 @@ class _ProtectingScreenState extends State<ProtectingScreen> {
                       "지역/품종을 입력하세요.",
                       style: TextStyle(
                         fontSize: 16,
-                        color: ProtectingScreen.hsbaColor,
+                        color: MissingNoticeScreen.hsbaColor,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -162,7 +161,7 @@ class _ProtectingScreenState extends State<ProtectingScreen> {
               children: [
                 Icon(Icons.circle),
                 Text(
-                  "최근에 보호소 및 게시판에 등록된 공고에요.",
+                  "최근에 등록된 공고에요.",
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 15,
@@ -242,13 +241,13 @@ class _ProtectingScreenState extends State<ProtectingScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // 버튼 클릭시 수행할 액션 작성
-          print('버튼클릭');
+
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => const ProtectAddScreen()));
+                  builder: (context) => const MissingAddScreen()));
         },
-        backgroundColor: customGreen,
+        backgroundColor: customOrange,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(100.0))),
         child: const Icon(
