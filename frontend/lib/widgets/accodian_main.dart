@@ -39,7 +39,7 @@ class _AccodianMainState extends State<AccodianMain> {
                   header: const ExpandableCardText(
                     titleText: "등록한 실종공고",
                     customBlack: customBlack,
-                    imgUrl: 'assets/images/customOrange',
+                    imgUrl: 'assets/images/cameraOrange.png',
                   ),
                   isExpanded: _expandedIndex == 0,
                   onTap: () {
@@ -64,16 +64,16 @@ class _AccodianMainState extends State<AccodianMain> {
               }
             }),
         const SizedBox(height: 10),
-        FutureBuilder<MissingDogListModel>(
-            future: myMissingDogs,
+        FutureBuilder<ProtectedDogList>(
+            future: myProtectingDog,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                var dog = snapshot.data!.myMissingDogs[0];
+                var dog = snapshot.data!.myProtectedDogs[0];
                 return ExpandableCard(
                   header: const ExpandableCardText(
                     titleText: "등록한 보호동물",
                     customBlack: customBlack,
-                    imgUrl: 'assets/images/customGreen',
+                    imgUrl: 'assets/images/cameraGreen.png',
                   ),
                   isExpanded: _expandedIndex == 1,
                   onTap: () {
@@ -83,9 +83,9 @@ class _AccodianMainState extends State<AccodianMain> {
                   },
                   expandedChild: ExpandableCardContent(
                     image: dog.image,
-                    name: dog.name,
+                    name: dog.breed,
                     location: dog.location,
-                    date: dog.dateTime.substring(0, 10),
+                    date: dog.dateTime.toString().substring(0, 10),
                   ),
                 );
               } else if (snapshot.hasError) {

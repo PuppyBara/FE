@@ -45,7 +45,7 @@ class MyDogsService {
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
 
-      if (data['myMissingDogs'] is List) {
+      if (data['myProtectedDogs'] is List) {
         return ProtectedDogList.fromJson(data);
       } else {
         throw Exception(

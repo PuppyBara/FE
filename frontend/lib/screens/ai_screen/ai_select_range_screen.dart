@@ -4,7 +4,9 @@ import 'package:frontend/screens/main.dart';
 import 'package:frontend/widgets/aiSearchProgress.dart';
 
 class AiSearchSelectRange extends StatefulWidget {
-  const AiSearchSelectRange({super.key});
+  const AiSearchSelectRange({super.key, required this.dogId});
+
+  final int dogId;
 
   @override
   State<AiSearchSelectRange> createState() => _AiSearchSelectRangeState();
@@ -73,8 +75,13 @@ class _AiSearchSelectRangeState extends State<AiSearchSelectRange> {
             height: 70,
           ),
           GestureDetector(
-            onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const AiSearching())),
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AiSearching(
+                          dogId: widget.dogId,
+                          upperBound: (100 - currentSliderValue).round(),
+                        ))),
             child: const Text(
               "다음으로 >> ",
               style: TextStyle(
