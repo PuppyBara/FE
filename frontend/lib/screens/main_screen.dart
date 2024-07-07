@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/ai_screen/ai_search_screen.dart';
+import 'package:frontend/screens/main.dart';
 import 'package:frontend/screens/missing_screen/missing_notice_screen.dart';
 import 'package:frontend/screens/protect_screen/protecting_screen.dart';
 import 'package:frontend/screens/shelter_screen/shelter_search_screen.dart';
 import 'package:frontend/widgets/accodian_main.dart';
-
+import 'package:frontend/my_flutter_app_icons.dart';
 import 'package:frontend/widgets/image_slider.dart';
 
 class MainScreen extends StatelessWidget {
@@ -170,10 +171,14 @@ class MainScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  _buttonColumn(Icons.home_filled, "보호소", context),
-                  _buttonColumn(Icons.circle, "AI검색", context),
-                  _buttonColumn(Icons.favorite, "보호중", context),
-                  _buttonColumn(Icons.bookmark, "실종공고", context),
+                  _buttonColumn(MyFlutterApp.home_05, "보호소", context,
+                      const Color.fromRGBO(67, 118, 106, 1)),
+                  _buttonColumn(
+                      MyFlutterApp.logo, "AI검색", context, customOrange),
+                  _buttonColumn(MyFlutterApp.heart, "보호중", context,
+                      const Color.fromRGBO(255, 104, 104, 1)),
+                  _buttonColumn(MyFlutterApp.bookmark, "실종공고", context,
+                      const Color.fromRGBO(83, 161, 186, 1)),
                 ],
               ),
             ),
@@ -191,9 +196,12 @@ class MainScreen extends StatelessWidget {
                   child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("근처 보호소의 최근 공고",
+                      Text(" 근처 보호소의 최근 공고",
                           style: TextStyle(
                               fontWeight: FontWeight.w700, fontSize: 20)),
+                      SizedBox(
+                        height: 5,
+                      ),
                       Row(
                         children: [
                           Icon(Icons.location_on_outlined),
@@ -231,9 +239,17 @@ class MainScreen extends StatelessWidget {
     );
   }
 
-  Widget _buttonColumn(IconData iconData, String label, BuildContext context) {
+  Widget _buttonColumn(
+      IconData iconData, String label, BuildContext context, Color color) {
     return Column(
       children: [
+        label == 'AI검색'
+            ? const SizedBox(
+                height: 3,
+              )
+            : const SizedBox(
+                height: 0,
+              ),
         TextButton(
           onPressed: () {
             if (label == '보호소') {
@@ -273,7 +289,8 @@ class MainScreen extends StatelessWidget {
             children: [
               Icon(
                 iconData,
-                size: 40,
+                size: label == 'AI검색' ? 35 : 40,
+                color: color,
               ),
               Text(
                 label,

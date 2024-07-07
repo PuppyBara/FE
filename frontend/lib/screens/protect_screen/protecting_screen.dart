@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/ai_result/ai_result_dog.dart';
 import 'package:frontend/models/my_missing_dog/missing_dog.dart';
+import 'package:frontend/my_flutter_app_icons.dart';
 import 'package:frontend/screens/ai_screen/ai_search_screen.dart';
 import 'package:frontend/screens/home_screen.dart';
 import 'package:frontend/screens/main.dart';
@@ -15,7 +16,7 @@ List<AiResultDog> resultDogs = [
   AiResultDog(
     id: 1,
     image: 'assets/images/samplePuppy.jpeg',
-    sex: 'Male',
+    sex: 'Female',
     dateTime: '2023-07-04T12:00:00',
     location: '서구 갈마동',
     whoProtected: '개인 임시보호중',
@@ -25,7 +26,7 @@ List<AiResultDog> resultDogs = [
   AiResultDog(
     id: 2,
     image: 'assets/images/samplePuppy2.jpeg',
-    sex: 'Male',
+    sex: 'Female',
     dateTime: '2023-07-04T12:00:00',
     location: '동구 유천동',
     whoProtected: '대전광역시 동물보호센터',
@@ -160,7 +161,14 @@ class _ProtectingScreenState extends State<ProtectingScreen> {
             const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.circle),
+                Icon(
+                  MyFlutterApp.logo,
+                  size: 19,
+                  color: customGreen,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
                 Text(
                   "최근에 보호소 및 게시판에 등록된 공고에요.",
                   style: TextStyle(
@@ -204,15 +212,38 @@ class _ProtectingScreenState extends State<ProtectingScreen> {
                       ),
                       child: Column(
                         children: [
-                          AspectRatio(
-                            aspectRatio: 1.7,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(12.0),
-                              child: Image.asset(
-                                dog.image,
-                                fit: BoxFit.cover,
+                          Stack(
+                            alignment: Alignment.bottomRight,
+                            children: [
+                              AspectRatio(
+                                aspectRatio: 1.7,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  child: Image.asset(
+                                    dog.image,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
-                            ),
+                              Container(
+                                padding: const EdgeInsets.all(8),
+                                margin:
+                                    const EdgeInsets.all(4), // 아이콘과 이미지 경계의 여백
+                                decoration: BoxDecoration(
+                                  color: dog.sex == 'Female'
+                                      ? customGreen
+                                      : customOrange, // 아이콘 배경색
+                                  shape: BoxShape.circle, // 원형으로 만들기
+                                ),
+                                child: Icon(
+                                  dog.sex == 'Female'
+                                      ? MyFlutterApp.vector
+                                      : MyFlutterApp.vector__1_,
+                                  color: Colors.white,
+                                  size: 12,
+                                ),
+                              ),
+                            ],
                           ),
                           const SizedBox(
                             height: 20,
@@ -222,7 +253,7 @@ class _ProtectingScreenState extends State<ProtectingScreen> {
                             textIcon: Icons.info_outline,
                           ),
                           MakeTextList(
-                            title: ' ${dog.dateTime}구조',
+                            title: ' ${dog.dateTime.substring(0, 10)}구조',
                             textIcon: Icons.calendar_month_outlined,
                           ),
                           MakeTextList(

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:frontend/my_flutter_app_icons.dart';
 import 'package:frontend/screens/home_screen.dart';
 import 'package:frontend/screens/login_screen/search_pw_screen.dart';
 import 'package:frontend/widgets/input_form.dart';
@@ -89,15 +90,15 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 80),
               InputForm(
                 inputText: "아이디를 입력해주세요.",
-                suffixIcon:
-                    Icon(Icons.person_outline, size: 30, color: inputTextColor),
+                suffixIcon: Icon(MyFlutterApp.user__1_,
+                    size: 30, color: inputTextColor),
                 controller: idController,
               ),
               const SizedBox(height: 20),
               InputForm(
                 inputText: "비밀번호를 입력해주세요.",
                 suffixIcon:
-                    Icon(Icons.lock_outline, size: 30, color: inputTextColor),
+                    Icon(MyFlutterApp.lock, size: 30, color: inputTextColor),
                 controller: passwordController,
               ),
               const SizedBox(height: 20),

@@ -37,7 +37,10 @@ class _AccodianMainState extends State<AccodianMain> {
                 var dog = snapshot.data!.myMissingDogs[0];
                 return ExpandableCard(
                   header: const ExpandableCardText(
-                      titleText: "등록한 실종공고", customBlack: customBlack),
+                    titleText: "등록한 실종공고",
+                    customBlack: customBlack,
+                    imgUrl: 'assets/images/customOrange',
+                  ),
                   isExpanded: _expandedIndex == 0,
                   onTap: () {
                     setState(() {
@@ -70,6 +73,7 @@ class _AccodianMainState extends State<AccodianMain> {
                   header: const ExpandableCardText(
                     titleText: "등록한 보호동물",
                     customBlack: customBlack,
+                    imgUrl: 'assets/images/customGreen',
                   ),
                   isExpanded: _expandedIndex == 1,
                   onTap: () {
@@ -183,7 +187,7 @@ class ExpandableCardContent extends StatelessWidget {
                         color: customBlack,
                       ),
                       Text(
-                        date,
+                        date.substring(0, 10),
                         style: const TextStyle(
                             fontSize: 12, fontWeight: FontWeight.w400),
                       ),
@@ -218,16 +222,22 @@ class ExpandableCardText extends StatelessWidget {
     super.key,
     required this.customBlack,
     required this.titleText,
+    required this.imgUrl,
   });
 
   final Color customBlack;
   final String titleText;
+  final String imgUrl;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Icon(Icons.camera_alt),
+        Image.asset(
+          imgUrl,
+          width: 20,
+          height: 18,
+        ),
         const SizedBox(width: 8),
         Text(
           titleText,

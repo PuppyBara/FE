@@ -139,7 +139,7 @@ class AiSearchResultScreen extends StatelessWidget {
                               textIcon: Icons.info_outline,
                             ),
                             MakeTextList(
-                              title: ' ${dog.dateTime}구조',
+                              title: ' ${dog.dateTime.substring(0, 10)}구조',
                               textIcon: Icons.calendar_month_outlined,
                             ),
                             MakeTextList(

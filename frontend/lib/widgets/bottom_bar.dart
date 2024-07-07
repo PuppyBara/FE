@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/my_flutter_app_icons.dart';
 
 class BottomBar extends StatefulWidget {
   final int selectedIndex;
@@ -26,13 +27,13 @@ class _BottomBarState extends State<BottomBar> {
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
-          makeBottomItem(Icons.home),
+          makeBottomItem(MyFlutterApp.home_05),
           makeBottomItem(Icons.search),
           makeBottomItem(
-            Icons.circle,
+            MyFlutterApp.logo__1_,
           ),
           makeBottomItem(
-            Icons.person_2_outlined,
+            MyFlutterApp.user,
           ),
         ],
         currentIndex: widget.selectedIndex,

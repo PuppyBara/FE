@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/my_flutter_app_icons.dart';
 import 'package:frontend/screens/ai_screen/ai_select_range_screen.dart';
+import 'package:frontend/screens/main.dart';
 import 'package:frontend/widgets/aiSearchProgress.dart';
 import 'package:frontend/models/my_missing_dog/missing_dog.dart';
 
@@ -68,7 +70,7 @@ class _AiSearchSelectScreenState extends State<AiSearchSelectScreen> {
                         });
                       },
                       child: Container(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(8),
@@ -89,15 +91,38 @@ class _AiSearchSelectScreenState extends State<AiSearchSelectScreen> {
                         ),
                         child: Column(
                           children: [
-                            AspectRatio(
-                              aspectRatio: 1.7,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(12.0),
-                                child: Image.asset(
-                                  dog.image,
-                                  fit: BoxFit.cover,
+                            Stack(
+                              alignment: Alignment.bottomRight,
+                              children: [
+                                AspectRatio(
+                                  aspectRatio: 1.7,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    child: Image.asset(
+                                      dog.image,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
                                 ),
-                              ),
+                                Container(
+                                  padding: const EdgeInsets.all(8),
+                                  margin: const EdgeInsets.all(
+                                      4), // 아이콘과 이미지 경계의 여백
+                                  decoration: BoxDecoration(
+                                    color: dog.sex == 'Female'
+                                        ? customGreen
+                                        : customOrange, // 아이콘 배경색
+                                    shape: BoxShape.circle, // 원형으로 만들기
+                                  ),
+                                  child: Icon(
+                                    dog.sex == 'Female'
+                                        ? MyFlutterApp.vector
+                                        : MyFlutterApp.vector__1_,
+                                    color: Colors.white,
+                                    size: 12,
+                                  ),
+                                ),
+                              ],
                             ),
                             const SizedBox(
                               height: 10,
@@ -131,7 +156,7 @@ class _AiSearchSelectScreenState extends State<AiSearchSelectScreen> {
                                   size: 13,
                                 ),
                                 Text(
-                                  dog.dateTime,
+                                  dog.dateTime.substring(0, 10),
                                   style: const TextStyle(
                                       fontWeight: FontWeight.w400,
                                       fontSize: 12,

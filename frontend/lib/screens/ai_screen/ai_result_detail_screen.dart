@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/shelter_dog_id/shelter_dog_detail_model.dart';
+import 'package:frontend/my_flutter_app_icons.dart';
+import 'package:frontend/screens/main.dart';
 import 'package:frontend/services/ai_search_api_service.dart';
 
 class AiResultDetailScreen extends StatelessWidget {
@@ -89,7 +91,14 @@ class AiResultDetailScreen extends StatelessWidget {
               children: [
                 const Row(
                   children: [
-                    Icon(Icons.circle),
+                    Icon(
+                      MyFlutterApp.logo,
+                      size: 19,
+                      color: customGreen,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
                     Text(
                       "동물정보",
                       style: TextStyle(
@@ -128,7 +137,14 @@ class AiResultDetailScreen extends StatelessWidget {
                 ),
                 const Row(
                   children: [
-                    Icon(Icons.circle),
+                    Icon(
+                      MyFlutterApp.logo,
+                      size: 19,
+                      color: customGreen,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
                     Text(
                       "구조정보",
                       style: TextStyle(
@@ -164,7 +180,14 @@ class AiResultDetailScreen extends StatelessWidget {
                 ),
                 const Row(
                   children: [
-                    Icon(Icons.circle),
+                    Icon(
+                      MyFlutterApp.logo,
+                      size: 19,
+                      color: customGreen,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
                     Text(
                       "동물보호센터 안내",
                       style: TextStyle(

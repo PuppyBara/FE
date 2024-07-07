@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:frontend/my_flutter_app_icons.dart';
 import 'package:frontend/screens/main.dart';
 import 'package:frontend/widgets/input_form.dart';
 import 'package:frontend/widgets/make_text_button.dart';
@@ -86,7 +87,7 @@ class _MissingAddScreenState extends State<MissingAddScreen> {
                 height: 80,
               ),
               const Text(
-                "실종정보 등록",
+                "실종공고 등록",
                 style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
               ),
               const SizedBox(
@@ -154,7 +155,14 @@ class _MissingAddScreenState extends State<MissingAddScreen> {
               const Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Icon(Icons.circle),
+                  Icon(
+                    MyFlutterApp.logo,
+                    size: 19,
+                    color: customOrange,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
                   Text(
                     "동물정보",
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
@@ -303,7 +311,11 @@ class _MissingAddScreenState extends State<MissingAddScreen> {
                                   borderRadius: BorderRadius.circular(5)),
                               child: IconButton(
                                   onPressed: () {},
-                                  icon: const Icon(Icons.man)),
+                                  icon: const Icon(
+                                    MyFlutterApp.vector,
+                                    color: Colors.white,
+                                    size: 34,
+                                  )),
                             ),
                             const SizedBox(
                               width: 10,
@@ -316,7 +328,11 @@ class _MissingAddScreenState extends State<MissingAddScreen> {
                                   borderRadius: BorderRadius.circular(5)),
                               child: IconButton(
                                   onPressed: () {},
-                                  icon: const Icon(Icons.man)),
+                                  icon: const Icon(
+                                    MyFlutterApp.vector__1_,
+                                    color: Colors.white,
+                                    size: 34,
+                                  )),
                             )
                           ],
                         )
@@ -460,7 +476,14 @@ class _MissingAddScreenState extends State<MissingAddScreen> {
               ),
               const Row(
                 children: [
-                  Icon(Icons.circle),
+                  Icon(
+                    MyFlutterApp.logo,
+                    size: 19,
+                    color: customOrange,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
                   Text(
                     "실종정보",
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),

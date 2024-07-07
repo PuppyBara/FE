@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:frontend/my_flutter_app_icons.dart';
 import 'package:frontend/screens/main.dart';
 import 'package:frontend/widgets/input_form.dart';
 import 'package:frontend/widgets/make_text_button.dart';
@@ -107,7 +108,7 @@ class _ProtectAddScreenState extends State<ProtectAddScreen> {
                     size: 14,
                   ),
                   Text(
-                    "비문분석을 위해 꼭 정면사진을 등록해주세요.",
+                    " 비문분석을 위해 꼭 정면사진을 등록해주세요.",
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 13,
@@ -152,7 +153,14 @@ class _ProtectAddScreenState extends State<ProtectAddScreen> {
               const Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Icon(Icons.circle),
+                  Icon(
+                    MyFlutterApp.logo,
+                    size: 19,
+                    color: customGreen,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
                   Text(
                     "동물정보",
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
@@ -228,7 +236,11 @@ class _ProtectAddScreenState extends State<ProtectAddScreen> {
                                     _pickImage();
                                     print("눌렀엉");
                                   },
-                                  icon: const Icon(Icons.man)),
+                                  icon: const Icon(
+                                    MyFlutterApp.vector,
+                                    color: Colors.white,
+                                    size: 34,
+                                  )),
                             ),
                             const SizedBox(
                               width: 10,
@@ -241,7 +253,11 @@ class _ProtectAddScreenState extends State<ProtectAddScreen> {
                                   borderRadius: BorderRadius.circular(5)),
                               child: IconButton(
                                   onPressed: () {},
-                                  icon: const Icon(Icons.man)),
+                                  icon: const Icon(
+                                    MyFlutterApp.vector__1_,
+                                    color: Colors.white,
+                                    size: 30,
+                                  )),
                             )
                           ],
                         )
@@ -385,7 +401,14 @@ class _ProtectAddScreenState extends State<ProtectAddScreen> {
               ),
               const Row(
                 children: [
-                  Icon(Icons.circle),
+                  Icon(
+                    MyFlutterApp.logo,
+                    size: 19,
+                    color: customGreen,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
                   Text(
                     "구조정보",
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),

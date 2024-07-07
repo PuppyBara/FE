@@ -32,20 +32,40 @@ class _ImageSliderState extends State<ImageSlider> {
     return Column(
       children: [
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.85,
+          width: MediaQuery.of(context).size.width * 0.8,
           height: 160,
           child: PageView.builder(
             controller: _pageController,
             itemCount: widget.images.length,
             itemBuilder: (context, index) {
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0),
-                  child: Image.asset(
-                    widget.images[index],
-                    fit: BoxFit.cover,
-                  ),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Stack(
+                  children: <Widget>[
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: Image.asset(
+                        widget.images[index],
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Positioned(
+                      child: Container(
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.5), // 반투명 검은색 배경
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: const Text(
+                          '대전광역시 동물보호센터',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               );
             },
