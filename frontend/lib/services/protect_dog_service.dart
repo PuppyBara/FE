@@ -14,10 +14,9 @@ class ProtectedDogService {
       'Authorization': 'Bearer $token'
     });
 
-    print('보호중인개공고${response.body}');
-
     if (response.statusCode == 200) {
-      List<dynamic> body = jsonDecode(response.body)['protectedDogs'];
+      List<dynamic> body =
+          jsonDecode(utf8.decode(response.bodyBytes))['protectedDogs'];
       List<ProtectedDogModel> dogs =
           body.map((dynamic item) => ProtectedDogModel.fromJson(item)).toList();
       return dogs;

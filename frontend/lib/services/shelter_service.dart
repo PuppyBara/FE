@@ -21,7 +21,8 @@ class ShelterService {
     );
 
     if (response.statusCode == 200) {
-      List<dynamic> jsonList = json.decode(response.body)['shelterDogs'];
+      List<dynamic> jsonList =
+          json.decode(utf8.decode(response.bodyBytes))['shelterDogs'];
       List<ShelterDog> dogs =
           jsonList.map((json) => ShelterDog.fromJson(json)).toList();
       return dogs;
@@ -42,6 +43,7 @@ class ShelterService {
       },
     );
     if (response.statusCode == 200) {
+      print('보호소 목록입니다${response.body}');
       return ShelterListModel.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to load shelters');

@@ -6,9 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:frontend/my_flutter_app_icons.dart';
 import 'package:frontend/screens/main.dart';
+import 'package:frontend/services/form_data_service.dart';
 import 'package:frontend/widgets/input_form.dart';
 import 'package:frontend/widgets/make_text_button.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:frontend/models/member_missing_dog/missing_dog_model.dart';
 
 class MissingAddScreen extends StatefulWidget {
   const MissingAddScreen({super.key});
@@ -30,6 +32,9 @@ class _MissingAddScreenState extends State<MissingAddScreen> {
 
   final ImagePicker _picker = ImagePicker();
   XFile? _image;
+
+  late String selectedSex;
+  late bool isNeutered;
 
   Future<void> _pickImage() async {
     try {
@@ -72,6 +77,37 @@ class _MissingAddScreenState extends State<MissingAddScreen> {
       setState(() {
         dateController.text = "${picked.toLocal()}".split(' ')[0];
       });
+    }
+  }
+
+  Future<void> _submitMissingDogInfo() async {
+    if (_image == null) {
+      print('이미지를 선택해주세요.');
+      return;
+    }
+
+    final dogInfo = MissingDogInfo(
+      image: _image!.path,
+      name: name.text,
+      age: int.parse(age.text),
+      breed: kindController.text,
+      sex: selectedSex, // 선택된 성별로 변경
+      color: furColor.text,
+      isNeutering: isNeutered, // 선택된 중성화 여부로 변경
+      feature: characteristic.text,
+    );
+
+    final etcInfo = EtcInfo(
+      location: location.text,
+      dateTime: DateTime.parse(dateController.text),
+    );
+
+    try {
+      final formDataService = FormDataService();
+      await formDataService.postMissingDog(dogInfo, etcInfo);
+      print('실종견 정보가 성공적으로 제출되었습니다.');
+    } catch (e) {
+      print('실종견 정보 제출에 실패했습니다: $e');
     }
   }
 
@@ -245,6 +281,7 @@ class _MissingAddScreenState extends State<MissingAddScreen> {
                                   color: customGrey, width: 2.0), // 포커스 상태의 테두리
                             ),
                           ),
+                          keyboardType: TextInputType.number,
                         ),
                       )
                     ],
@@ -307,10 +344,16 @@ class _MissingAddScreenState extends State<MissingAddScreen> {
                               width: 63,
                               height: 49,
                               decoration: BoxDecoration(
-                                  color: customGrey,
+                                  color: selectedSex == 'FEMALE'
+                                      ? customOrange
+                                      : customGrey,
                                   borderRadius: BorderRadius.circular(5)),
                               child: IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      selectedSex = 'FEMALE';
+                                    });
+                                  },
                                   icon: const Icon(
                                     MyFlutterApp.vector,
                                     color: Colors.white,
@@ -324,10 +367,16 @@ class _MissingAddScreenState extends State<MissingAddScreen> {
                               width: 63,
                               height: 49,
                               decoration: BoxDecoration(
-                                  color: customGrey,
+                                  color: selectedSex == 'MALE'
+                                      ? customOrange
+                                      : customGrey,
                                   borderRadius: BorderRadius.circular(5)),
                               child: IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      selectedSex = 'MALE';
+                                    });
+                                  },
                                   icon: const Icon(
                                     MyFlutterApp.vector__1_,
                                     color: Colors.white,
@@ -397,10 +446,16 @@ class _MissingAddScreenState extends State<MissingAddScreen> {
                               width: 63,
                               height: 49,
                               decoration: BoxDecoration(
-                                  color: customGrey,
+                                  color: isNeutered == true
+                                      ? customOrange
+                                      : customGrey,
                                   borderRadius: BorderRadius.circular(5)),
                               child: IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  setState(() {
+                                    isNeutered = true;
+                                  });
+                                },
                                 icon: const Icon(Icons.circle_outlined),
                                 color: Colors.white,
                                 iconSize: 25,
@@ -413,11 +468,17 @@ class _MissingAddScreenState extends State<MissingAddScreen> {
                               width: 63,
                               height: 49,
                               decoration: BoxDecoration(
-                                color: customGrey,
+                                color: isNeutered == false
+                                    ? customOrange
+                                    : customGrey,
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  setState(() {
+                                    isNeutered = false;
+                                  });
+                                },
                                 icon: const Icon(Icons.close),
                                 color: Colors.white,
                                 iconSize: 30,
@@ -589,7 +650,9 @@ class _MissingAddScreenState extends State<MissingAddScreen> {
                 color: customOrange,
                 buttonWidth: MediaQuery.of(context).size.width * 0.7,
                 buttonHeight: 39,
-                onPressed: () {},
+                onPressed: () {
+                  _submitMissingDogInfo();
+                },
                 radius: 5,
                 fontSize: 18,
                 fontWeight: FontWeight.w700,

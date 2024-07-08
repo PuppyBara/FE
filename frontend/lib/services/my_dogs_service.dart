@@ -20,7 +20,7 @@ class MyDogsService {
     });
 
     if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
+      final data = jsonDecode(utf8.decode(response.bodyBytes));
       print('호출서비스$data');
       if (data['myMissingDogs'] is List) {
         return MissingDogListModel.fromJson(data);
@@ -43,7 +43,7 @@ class MyDogsService {
     });
 
     if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
+      final data = jsonDecode(utf8.decode(response.bodyBytes));
 
       if (data['myProtectedDogs'] is List) {
         return ProtectedDogList.fromJson(data);

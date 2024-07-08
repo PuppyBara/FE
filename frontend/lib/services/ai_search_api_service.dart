@@ -20,7 +20,7 @@ class AiSearchApiService {
     });
 
     if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
+      final data = jsonDecode(utf8.decode(response.bodyBytes));
       return ShelterDogDetailModel.fromJson(data['shelterDogInfo']);
     } else {
       throw Exception('Failed to load shelter dog info');
