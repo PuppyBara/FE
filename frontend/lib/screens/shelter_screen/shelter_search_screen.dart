@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/models/shelter/shelter.dart';
 import 'package:frontend/models/shelter/shelter_list_model.dart';
+import 'package:frontend/my_flutter_app_icons.dart';
 import 'package:frontend/screens/main.dart';
 import 'package:frontend/screens/shelter_screen/shelter_search_result_screen.dart';
 import 'package:frontend/services/shelter_service.dart';
@@ -14,6 +16,9 @@ class ShelterSearchScreen extends StatefulWidget {
 
 class _ShelterSearchScreenState extends State<ShelterSearchScreen> {
   late Future<ShelterListModel> shelterList;
+  var shelterName = '';
+  var shelterTel = '';
+  var shelterLocation = '';
 
   @override
   void initState() {
@@ -64,10 +69,10 @@ class SheleterListWidget extends StatefulWidget {
 
 class _SheleterListWidgetState extends State<SheleterListWidget> {
   late String selectedRegion;
-  late String selectedShelter;
+  late Shelter selectedShelter;
   late List<String> regions;
-  late Map<String, List<String>> shelters;
-  late List<String> list;
+  late Map<String, List<Shelter>> shelters;
+  late List<int> list;
 
   @override
   void initState() {
@@ -120,14 +125,20 @@ class _SheleterListWidgetState extends State<SheleterListWidget> {
                     itemCount: regions.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        title: Text(
-                          regions[index],
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            color: selectedRegion == regions[index]
-                                ? Colors.white
-                                : Colors.black,
-                          ),
+                        title: Row(
+                          children: [
+                            Text(
+                              regions[index],
+                              style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 18,
+                                color: selectedRegion == regions[index]
+                                    ? Colors.white
+                                    : Colors.black,
+                              ),
+                            ),
+                            Text(regions.length.toString()),
+                          ],
                         ),
                         tileColor: selectedRegion == regions[index]
                             ? customGreen
@@ -153,13 +164,79 @@ class _SheleterListWidgetState extends State<SheleterListWidget> {
                     itemBuilder: (context, index) {
                       final shelter = shelters[selectedRegion]![index];
                       return ListTile(
-                        title: Text(
-                          shelter,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            color: selectedShelter == shelter
-                                ? Colors.white
-                                : Colors.black,
+                        title: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                shelter.name,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  color: selectedShelter == shelter
+                                      ? Colors.white
+                                      : Colors.black,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.location_on_outlined,
+                                    size: 10,
+                                    color: selectedShelter == shelter
+                                        ? Colors.white
+                                        : Colors.black,
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      shelter.location,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        color: selectedShelter == shelter
+                                            ? Colors.white
+                                            : Colors.black,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    MyFlutterApp.call,
+                                    size: 10,
+                                    color: selectedShelter == shelter
+                                        ? Colors.white
+                                        : Colors.black,
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    shelter.tel,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      color: selectedShelter == shelter
+                                          ? Colors.white
+                                          : Colors.black,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                         tileColor:
@@ -178,20 +255,29 @@ class _SheleterListWidgetState extends State<SheleterListWidget> {
           ),
         ),
         MakeTextButton(
-          text: "선택완료",
+          text: "선택 완료",
           color: customOrange,
           buttonWidth: 378,
           buttonHeight: 52,
           onPressed: () {
-            list.add(selectedShelter);
+            list.add(selectedShelter.id);
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => ShelterSearchResultScreen(
                   selectedShelter: list,
+                  shelterName: selectedShelter.name,
+                  shelterTel: selectedShelter.tel,
+                  shelterLocation: selectedShelter.location,
                 ),
               ),
-            );
+            ).then((_) {
+              setState(() {
+                list.clear();
+                selectedRegion = regions[0];
+                selectedShelter = shelters[selectedRegion]![0];
+              });
+            });
           },
           radius: 12,
           fontSize: 22,

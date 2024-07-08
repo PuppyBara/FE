@@ -33,8 +33,8 @@ class _MissingAddScreenState extends State<MissingAddScreen> {
   final ImagePicker _picker = ImagePicker();
   XFile? _image;
 
-  late String selectedSex;
-  late bool isNeutered;
+  String selectedSex = "FEMALE";
+  bool isNeutered = true;
 
   Future<void> _pickImage() async {
     try {

@@ -90,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 80),
               InputForm(
                 inputText: "아이디를 입력해주세요.",
-                suffixIcon: Icon(MyFlutterApp.user__1_,
+                suffixIcon: Icon(Icons.person_2_outlined,
                     size: 30, color: inputTextColor),
                 controller: idController,
               ),
@@ -98,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
               InputForm(
                 inputText: "비밀번호를 입력해주세요.",
                 suffixIcon:
-                    Icon(MyFlutterApp.lock, size: 30, color: inputTextColor),
+                    Icon(Icons.lock_outline, size: 30, color: inputTextColor),
                 controller: passwordController,
               ),
               const SizedBox(height: 20),
@@ -110,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       text: "로그인",
                       color: personButtonColor,
                       buttonWidth: buttonWidth,
-                      buttonHeight: 44,
+                      buttonHeight: 50,
                       radius: 10,
                       fontSize: 20,
                       onPressed: login,

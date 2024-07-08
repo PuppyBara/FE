@@ -62,21 +62,17 @@ class FormDataService {
     // });
 
     FormData formData = FormData.fromMap({
-      'missingDogInfo': {
-        'image':
-            await MultipartFile.fromFile(dogInfo.image, filename: 'upload.jpg'),
-        'name': dogInfo.name,
-        'age': dogInfo.age,
-        'breed': dogInfo.breed,
-        'sex': dogInfo.sex,
-        'color': dogInfo.color,
-        'isNeutering': dogInfo.isNeutering,
-        'feature': dogInfo.feature,
-      },
-      'etcInfo': {
-        'location': etcInfo.location,
-        'dateTime': formatDateTime(etcInfo.dateTime),
-      }
+      'missingDogInfo.image':
+          await MultipartFile.fromFile(dogInfo.image, filename: 'upload.jpg'),
+      'missingDogInfo.name': dogInfo.name,
+      'missingDogInfo.age': dogInfo.age.toString(),
+      'missingDogInfo.breed': dogInfo.breed,
+      'missingDogInfo.sex': dogInfo.sex,
+      'missingDogInfo.color': dogInfo.color,
+      'missingDogInfo.isNeutering': dogInfo.isNeutering.toString(),
+      'missingDogInfo.feature': dogInfo.feature,
+      'etcInfo.location': etcInfo.location,
+      'etcInfo.dateTime': formatDateTime(etcInfo.dateTime),
     });
 
     print('FormData: ${formData.fields}'); // FormData 내용 출력
@@ -86,13 +82,17 @@ class FormDataService {
       'Authorization': 'Bearer $token',
     };
 
-    Response response =
-        await dio.post('$baseUrl/member/missing-dog', data: formData);
+    try {
+      Response response =
+          await dio.post('$baseUrl/member/missing-dog', data: formData);
 
-    print('요청결과${response.data}');
-
-    if (response.statusCode != 200) {
-      throw Exception('Failed to submit my missing dog info');
+      if (response.statusCode == 200) {
+        print('실종견 정보가 성공적으로 제출되었습니다.');
+      } else {
+        print('Failed to submit my missing dog info');
+      }
+    } catch (e) {
+      print('실종견 정보 제출에 실패했습니다: $e');
     }
   }
 

@@ -15,7 +15,7 @@ class Shelter {
 
   factory Shelter.fromJson(Map<String, dynamic> json) {
     return Shelter(
-      id: json['id'],
+      id: json['shelterId'],
       name: json['name'],
       tel: json['tel'],
       location: json['location'],
